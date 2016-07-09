@@ -1,5 +1,21 @@
 {
+    "scripts": {
+        "migrate:prod": "phinx migrate -c config/phinx.php -e production",
+        "migrate:stg": "phinx migrate -c config/phinx.php -e staging",
+        "migrate:dev": "phinx migrate -c config/phinx.php -e development",
+        "migrate:test": "env PHINX_ENV=testing phinx migrate -c config/phinx.php -e testing",
+        "migrate:down:prod": "phinx rollback -c config/phinx.php -e production",
+        "migrate:down:stg": "phinx rollback -c config/phinx.php -e staging",
+        "migrate:down:dev": "phinx rollback -c config/phinx.php -e development",
+        "migrate:down:test": "env PHINX_ENV=testing phinx rollback -c config/phinx.php -e testing",
+        
+        "phpunit": "./composer.phar migrate:test && phpunit --colors=always --bootstrap ./config/bootstrap.php",
+        "phpunit:bat": "./composer.phar phpunit ./bat/"
+    },
     "require": {
         "robmorgan/phinx": "^0.6.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.8"
     }
 }
